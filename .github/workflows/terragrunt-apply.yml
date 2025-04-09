@@ -7,6 +7,10 @@ on:
         description: 'The directory where Terragrunt should run'
         required: true
         type: string
+      terraform-version:
+        description: 'The version of Terraform to install'
+        required: true
+        type: string
     secrets:
       TERRAGRUNT_GITHUB_TOKEN:
         required: false
@@ -23,7 +27,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.0
+          terraform_version: ${{ inputs.terraform-version }}
 
       - name: Install Terragrunt
         run: |
