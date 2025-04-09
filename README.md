@@ -10,7 +10,7 @@ This repository contains reusable GitHub Actions workflows for managing Terragru
 
 ## Secrets
 
-- `GITHUB_TOKEN`: GitHub token for managing repositories and teams.
+- `TERRAGRUNT_GITHUB_TOKEN`: GitHub token for managing repositories and teams.
 - `GCP_SERVICE_ACCOUNT_KEY` (optional): GCP service account key for Terragrunt operations requiring GCP authentication.
 
 ## Usage
@@ -24,7 +24,7 @@ jobs:
     with:
       working-directory: path/to/your/terragrunt/code
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      TERRAGRUNT_GITHUB_TOKEN: ${{ secrets.TERRAGRUNT_GITHUB_TOKEN }}
       GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 ```
 
