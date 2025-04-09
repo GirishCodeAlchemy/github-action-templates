@@ -40,6 +40,7 @@ jobs:
       - name: Run Terragrunt Plan
         run: |
           cd ${{ inputs.working-directory }}
+          ls -lart
           terragrunt plan
         env:
           TERRAGRUNT_GITHUB_TOKEN: ${{ secrets.TERRAGRUNT_GITHUB_TOKEN }}

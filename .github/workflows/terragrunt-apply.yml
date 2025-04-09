@@ -40,6 +40,7 @@ jobs:
       - name: Run Terragrunt Apply
         run: |
           cd ${{ inputs.working-directory }}
+          ls -lart
           terragrunt apply -auto-approve
         env:
           TERRAGRUNT_GITHUB_TOKEN: ${{ secrets.TERRAGRUNT_GITHUB_TOKEN }}
