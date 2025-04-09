@@ -23,4 +23,6 @@ jobs:
       - name: Run Terragrunt Format
         run: |
           cd ${{ inputs.working-directory }}
-          terragrunt hclfmt
+          ls -lart
+          terragrunt fmt -recursive
+          terragrunt run-all hclfmt
