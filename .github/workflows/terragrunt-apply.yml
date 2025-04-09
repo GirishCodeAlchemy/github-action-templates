@@ -1,0 +1,39 @@
+name: Terragrunt Apply
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: 'The directory where Terragrunt should run'
+        required: true
+        type: string
+    secrets:
+      GITHUB_TOKEN:
+        required: false
+      GCP_SERVICE_ACCOUNT_KEY:
+        required: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Authenticate with GCP (if GCP key is provided)
+        if: secrets.GCP_SERVICE_ACCOUNT_KEY != ''
+        run: |
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > gcp-key.json
+          gcloud auth activate-service-account --key-file=gcp-key.json
+
+      - name: Run Terragrunt Apply
+        run: |
+          cd ${{ inputs.working-directory }}
+          terragrunt apply -auto-approve
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
