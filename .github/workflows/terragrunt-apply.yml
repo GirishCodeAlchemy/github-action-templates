@@ -26,7 +26,7 @@ jobs:
           terraform_version: 1.5.0
 
       - name: Authenticate with GCP (if GCP key is provided)
-        if: secrets.GCP_SERVICE_ACCOUNT_KEY != ''
+        if: secrets.GCP_SERVICE_ACCOUNT_KEY != null
         run: |
           echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > gcp-key.json
           gcloud auth activate-service-account --key-file=gcp-key.json
