@@ -25,12 +25,12 @@ jobs:
         with:
           terraform_version: 1.5.0
 
-      - name: Authenticate with GCP
-        if: "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}"
-        run: |
-          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > gcp-key.json
-          gcloud auth activate-service-account --key-file=gcp-key.json
-          rm -f gcp-key.json
+      # - name: Authenticate with GCP
+      #   if: ${{ inputs.GCP_SERVICE_ACCOUNT_KEY }}
+      #   run: |
+      #     echo "${{ inputs.GCP_SERVICE_ACCOUNT_KEY }}" > gcp-key.json
+      #     gcloud auth activate-service-account --key-file=gcp-key.json
+      #     rm -f gcp-key.json
 
       - name: Run Terragrunt Plan
         run: |
