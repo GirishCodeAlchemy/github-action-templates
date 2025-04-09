@@ -25,12 +25,17 @@ jobs:
         with:
           terraform_version: 1.5.0
 
-      - name: Authenticate with GCP
-        if: ${{ inputs.GCP_SERVICE_ACCOUNT_KEY }}
+      - name: Install Terragrunt
         run: |
-          echo "${{ inputs.GCP_SERVICE_ACCOUNT_KEY }}" > gcp-key.json
-          gcloud auth activate-service-account --key-file=gcp-key.json
-          rm -f gcp-key.json
+          curl -L https://github.com/gruntwork-io/terragrunt/releases/download/v0.50.0/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
+          chmod +x /usr/local/bin/terragrunt
+
+      # - name: Authenticate with GCP
+      #   if: ${{ inputs.GCP_SERVICE_ACCOUNT_KEY }}
+      #   run: |
+      #     echo "${{ inputs.GCP_SERVICE_ACCOUNT_KEY }}" > gcp-key.json
+      #     gcloud auth activate-service-account --key-file=gcp-key.json
+      #     rm -f gcp-key.json
 
       - name: Run Terragrunt Apply
         run: |
