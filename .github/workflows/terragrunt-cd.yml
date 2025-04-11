@@ -33,10 +33,8 @@ jobs:
 
       - name: Install Terragrunt
         run: |
-          TERRAGRUNT_VERSION=$(curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep tag_name | cut -d '"' -f 4)
-          wget https://github.com/gruntwork-io/terragrunt/releases/download/${TERRAGRUNT_VERSION}/terragrunt_linux_amd64
-          sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
-          sudo chmod +x /usr/local/bin/terragrunt
+          curl -L https://github.com/gruntwork-io/terragrunt/releases/download/v0.50.0/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
+          chmod +x /usr/local/bin/terragrunt
 
       # - name: GCP Authentication
       #   if: secrets.GCP_SERVICE_ACCOUNT_KEY != ''
